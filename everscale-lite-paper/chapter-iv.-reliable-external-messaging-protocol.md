@@ -1,0 +1,17 @@
+# Chapter IV. Reliable External Messaging Protocol
+
+When we post a picture on Facebook we don't expect the process to take minutes, or even half a minute. We, more or less, expect it to happen instantly; two, three seconds, after that our patience wanes. However, in blockchains today, when a transaction is sent, the wait is long; half a minute, many minutes etc. We want to ensure that the user has the same experience working with the blockchain as with other modern IT systems like Facebook or Instagram. The problem, of course, is that when users send the message, it sends a message to some smart contract, which then needs to be executed, and the validators need to validate the execution. This process takes time. How can we decrease the time that it takes users to see the result of the execution of their message on the blockchain?
+
+In answering that we must address the other problems which need to be tackled in this paradigm: replay attacks, DDOS and front running attacks. A replay attack is when the smart contract is fed the same messages, to execute the same transaction, several times, instead of only once. Protection against the replay attack now needs to happen inside the smart contract, which takes execution time, which takes Gas and so on. And then there is a DDoS, this is when the users can just load the network with many external messages, millions of messages, for free, and make a server halt. This, incidentally, happens often on blockchains. Front running attacks are where, for example, a trade has to be made and a message is sent with a trade order, someone else sees it, and they send another message, which then reorders into being higher than the original message and it can take advantage of it.
+
+REMP solves these problems.
+
+If a REMP validator accepts a message and sends an acceptance confirmation to the user, then this message will most certainly be included into the block. The validator then sends status about what happened to the message to the user along the road. The message will be included into the block in the order it was received by the validator, meaning that, even if the block collation failed, it will be included into the next block in the same order. This is protection against front running attacks. And it also ensures it will be included only once which is a protection against Replay attack.&#x20;
+
+As was previously explained, the collated block has an extremely low chance of being wrong, meaning that the user can assume that once the acknowledged message from the validator is received via REMP, the message will be included in the block; that the transaction is executed correctly and the user can close the application. In terms of the User Experience that means a sub-second finality (the message to and from the REMP takes around 50-100 ms., while the REMP processing takes another 500 ms. on average. All in all, less than a second.)
+
+REMP also has a built-in DDOS protection which ensures that if the user sends a lot of messages, which are failing on execution then this user that sends those messages will be banned for ever increasing periods of time.
+
+So again, REMP protocol ensures sub-second finality, replay protection, DDoS protection, and front running protection.
+
+![](https://lh3.googleusercontent.com/2QVTxbHiwM4-4ey3tqyUtrcAD40oC3tyNzyWvW0RVLO-reZ-Q4IyI1Em10Ath2SYsxIA2z7\_yuyK55wKDyNZtkWQ\_HezGJtcjLzASo9oDO5lmaHlaSwW788p1k2JCos5v9l0-9-k)
